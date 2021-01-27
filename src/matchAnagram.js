@@ -1,7 +1,7 @@
 const md5 = require('md5');
 const {
   filterArray,
-  getLetterOccurrence,
+  getLetterCount,
   getPermutations,
   getStringLettersObject
 } = require('./helpers');
@@ -30,12 +30,12 @@ const matchAnagram = (anagram, wordsObjectSorted, selectedWordsArray) => {
     Math.floor(anagramLength / (maxNumberOfWordsInResultString - selectedWordsCount))
   )
   
-  for (let key of keysOfSortedWordsObject) {
+  for (const key of keysOfSortedWordsObject) {
     if (key < minWordLength) continue
     
-    for (let wordOne of wordsObjectSorted[key]) {
+    for (const wordOne of wordsObjectSorted[key]) {
       const missingLettersObject = Object.entries(anagramLettersObject).reduce((acc, [letter, count]) => {
-        const countInWordOne = getLetterOccurrence(wordOne, new RegExp(letter, 'g'))
+        const countInWordOne = getLetterCount(wordOne, new RegExp(letter, 'g'))
         
         if (countInWordOne === 0) {
           return {
@@ -57,11 +57,11 @@ const matchAnagram = (anagram, wordsObjectSorted, selectedWordsArray) => {
       const missingLettersArray = Object.keys(missingLettersObject)
       
       if (wordsObjectSorted[anagramLength - key]) {
-        for (let wordTwo of wordsObjectSorted[anagramLength - key]) {
+        for (const wordTwo of wordsObjectSorted[anagramLength - key]) {
           let matchCheck = true
           
-          for (let letter of missingLettersArray) {
-            const countInWordTwo = getLetterOccurrence(wordTwo, new RegExp(letter, 'g'))
+          for (const letter of missingLettersArray) {
+            const countInWordTwo = getLetterCount(wordTwo, new RegExp(letter, 'g'))
             
             if (countInWordTwo !== missingLettersObject[letter]) {
               matchCheck = false
@@ -72,10 +72,10 @@ const matchAnagram = (anagram, wordsObjectSorted, selectedWordsArray) => {
           if (matchCheck) {
             const selectedWordsPermutations = getPermutations([...selectedWordsArray, wordOne, wordTwo])
             
-            for (let permutation of selectedWordsPermutations) {
+            for (const permutation of selectedWordsPermutations) {
               const permutationHash = md5(permutation.join(' '))
               
-              for (let hash of hashes) {
+              for (const hash of hashes) {
                 if (hash === permutationHash) {
                   console.log(`found hash ${hash}: `, permutation.join(' '))
                   

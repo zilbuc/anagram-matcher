@@ -16,14 +16,14 @@ if (!process.env.HASHES || !process.env.ANAGRAM || !process.env.DATAFILE_PATH) {
 
 const time1 = Date.now();
 
+const anagramClean = process.env.ANAGRAM.replace(/[ ']/g, '');
+const anagramLettersObject = getStringLettersObject(anagramClean);
+
 const file = fs.readFileSync(process.env.DATAFILE_PATH, 'utf8');
 
 const initialArray = file.split(/\r?\n/);
 const noDuplicatesArray = initialArray.filter((word, index) =>
   initialArray.indexOf(word.replace(/'/g, '')) === index);
-
-const anagramClean = process.env.ANAGRAM.replace(/[ ']/g, '');
-const anagramLettersObject = getStringLettersObject(anagramClean);
 
 const wordsArrayFiltered = filterArray(noDuplicatesArray, anagramLettersObject);
 const wordsObjectSorted = sortWordsArray(wordsArrayFiltered);

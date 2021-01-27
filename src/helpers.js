@@ -41,7 +41,7 @@ const filterArray = (wordsArray, anagramLettersObject) => wordsArray.filter(word
 
   let letterCheck = true
 
-  for (let key of letterArray) {
+  for (const key of letterArray) {
     const count = anagramLettersObject[key] ? anagramLettersObject[key] : 0
   
     if (count === 0 || getLetterCount(word, new RegExp(key, 'g')) > count) {
@@ -73,7 +73,7 @@ const sortWordsArray = wordsArray => wordsArray.reduce((acc, word) => {
 
 module.exports = {
   getStringLettersObject,
-  getLetterOccurrence: getLetterCount,
+  getLetterCount,
   getPermutations,
   filterArray,
   sortWordsArray,

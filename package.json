@@ -1,19 +1,20 @@
 {
-  "name": "trustpilot",
+  "name": "anagram-matcher",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "md5": "^2.3.0"
+    "jest": "^26.6.3"
   },
   "dependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "md5": "^2.3.0"
   }
 }

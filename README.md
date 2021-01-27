@@ -25,6 +25,8 @@
 - MIN_LENGTH_WORD_(ONE|TWO|THREE) - min length of words in array used to start matching
   in respective recursion iteration. If omitted, length is calculated using formula 
   (anagramLength / (MAX_NUMBER_OF_WORDS - selectedWordsCount)) for respective iteration. 
+- USE_REVERSE_LOOP - 0 for `false` and 1 for `true`. Defaults to 1. If true, keys of sorted object
+  are looped in descending order.
 - ANAGRAM - string used to match anagrams.
 - HASHES - string of MD5 hashes of anagrams to be matched separated by commas.
 
@@ -36,6 +38,6 @@
   variables is in essence an integration test for it.
 - Current arguments in `.env` file (MAX_NUMBER_OF_WORDS=4, MIN_LENGTH_WORD_ONE=8 and 
   MIN_LENGTH_WORD_TWO=4) are optimized for this particular task. I determined them by 
-  running the algorithm with MAX_NUMBER_OF_WORDS=4 without MIN_LENGTH params (it takes ~8 
-  minutes on my laptop).
+  running the algorithm with MAX_NUMBER_OF_WORDS=4 without MIN_LENGTH params (it takes ~18s with reverse
+  looping (or ~8 minutes if looping in ascending order) on my laptop).
   

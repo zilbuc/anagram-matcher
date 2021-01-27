@@ -14,6 +14,8 @@ const customMinWordLengthMatchers = {
   2: process.env.MIN_LENGTH_WORD_THREE ?? 0,
 }
 
+const useReverseLoop = !(process.env.USE_REVERSE_LOOP ?? 1 === 0)
+
 const hashes = [ ...(process.env.HASHES ? process.env.HASHES.split(',') : []) ]
 
 const matchAnagram = (anagram, wordsObjectSorted, selectedWordsArray) => {
@@ -21,7 +23,9 @@ const matchAnagram = (anagram, wordsObjectSorted, selectedWordsArray) => {
   const anagramLength = anagram.length
   const anagramLettersObject = getStringLettersObject(anagram)
   
-  const keysOfSortedWordsObject = Object.keys(wordsObjectSorted).map(key => parseInt(key))
+  const keysOfSortedWordsObject = Object.keys(wordsObjectSorted)
+    .map(key => parseInt(key))
+    .sort((a, b) => useReverseLoop ? b - a : a - b)
   
   const selectedWordsCount = selectedWordsArray.length
   
